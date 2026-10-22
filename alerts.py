@@ -126,8 +126,14 @@ def access_token(sa):
     return json.load(urllib.request.urlopen(req, timeout=30))["access_token"]
 
 
+def service_account():
+    # the key file's JSON, either as-is or base64-encoded onto one line (easier to paste into settings)
+    raw = os.environ["FCM_SERVICE_ACCOUNT"].strip()
+    return json.loads(raw if raw.startswith("{") else base64.b64decode(raw))
+
+
 def send(alerts):
-    sa = json.loads(os.environ["FCM_SERVICE_ACCOUNT"])
+    sa = service_account()
     token = access_token(sa)
     url = f"https://fcm.googleapis.com/v1/projects/{sa['project_id']}/messages:send"
     failed = 0

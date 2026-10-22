@@ -22,4 +22,5 @@ Never hand-edit `state.json`, and never push one that sync.py rejected.
 `alerts.py` compares the previous and new `state.json` and sends Firebase Cloud Messaging alerts:
 field status changes and new announcements to topic `alerts`; moved or called-off upcoming games to
 `team-<team id>` (the app subscribes followers to that topic). The Firebase key lives only in the
-`FCM_SERVICE_ACCOUNT` environment variable; this repository is public, so never commit it.
+`FCM_SERVICE_ACCOUNT` environment variable (the service account JSON, raw or base64-encoded);
+this repository is public, so never commit it.
